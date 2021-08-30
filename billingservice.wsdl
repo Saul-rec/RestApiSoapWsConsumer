@@ -1,0 +1,290 @@
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:sch="http://www.htc.com/billing/service/generated"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.htc.com/billing/service/generated"
+	targetNamespace="http://www.htc.com/billing/service/generated">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.htc.com/billing/service/generated">
+			<xs:element name="newBillingRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="codEmployee" type="xs:long" />
+						<xs:element name="nameClient" type="xs:string" />
+						<xs:element name="paymentType" type="xs:string" />
+						<xs:element maxOccurs="unbounded" minOccurs="1"
+							name="productDetails">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codProduct" type="xs:long" />
+									<xs:element name="quantity" type="xs:int" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="newBillingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="serviceStatus"
+							type="tns:serviceStatus" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="serviceStatus">
+				<xs:sequence>
+					<xs:element name="serviceCode" type="xs:string" />
+					<xs:element maxOccurs="unbounded" name="serviceResult"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="deleteBillingRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="billingCode" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="deleteBillingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="serviceStatus"
+							type="tns:serviceStatus" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAllBillingRequest">
+				<xs:complexType>
+					<xs:sequence />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAllBillingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" name="billingResult"
+							type="tns:billingResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="billingResult">
+				<xs:sequence>
+					<xs:element name="billingCode" type="xs:long" />
+					<xs:element name="codeEmployee" type="xs:long" />
+					<xs:element name="nameEmployee" type="xs:string" />
+					<xs:element name="nameClient" type="xs:string" />
+					<xs:element name="paymentType" type="xs:string" />
+					<xs:element name="dateOfSell" type="xs:date" />
+					<xs:element name="iva" type="xs:double" />
+					<xs:element name="subtotal" type="xs:double" />
+					<xs:element name="totalSell" type="xs:double" />
+					<xs:element maxOccurs="unbounded" name="productsDetails">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="codProduct" type="xs:long" />
+								<xs:element name="quantity" type="xs:int" />
+								<xs:element name="presentationProduct"
+									type="xs:string" />
+								<xs:element name="nameProduct" type="xs:string" />
+								<xs:element name="unitPriceProduct" type="xs:double" />
+								<xs:element name="amount" type="xs:double" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="findByBillingCodeRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="billingCode" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findByBillingCodeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="billingResult"
+							type="tns:billingResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateBillingRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="billingCode" type="xs:long" />
+						<xs:element name="codEmployee" type="xs:long" />
+						<xs:element name="nameClient" type="xs:string" />
+						<xs:element name="paymentType" type="xs:string" />
+						<xs:element maxOccurs="unbounded" minOccurs="1"
+							name="productDetails">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codProduct" type="xs:long" />
+									<xs:element name="quantity" type="xs:int" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateBillingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="serviceStatus"
+							type="tns:serviceStatus" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="newBillingRequest">
+		<wsdl:part element="tns:newBillingRequest"
+			name="newBillingRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findByBillingCodeRequest">
+		<wsdl:part element="tns:findByBillingCodeRequest"
+			name="findByBillingCodeRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findAllBillingRequest">
+		<wsdl:part element="tns:findAllBillingRequest"
+			name="findAllBillingRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBillingRequest">
+		<wsdl:part element="tns:updateBillingRequest"
+			name="updateBillingRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteBillingResponse">
+		<wsdl:part element="tns:deleteBillingResponse"
+			name="deleteBillingResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBillingResponse">
+		<wsdl:part element="tns:updateBillingResponse"
+			name="updateBillingResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="newBillingResponse">
+		<wsdl:part element="tns:newBillingResponse"
+			name="newBillingResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteBillingRequest">
+		<wsdl:part element="tns:deleteBillingRequest"
+			name="deleteBillingRequest">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findAllBillingResponse">
+		<wsdl:part element="tns:findAllBillingResponse"
+			name="findAllBillingResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="findByBillingCodeResponse">
+		<wsdl:part element="tns:findByBillingCodeResponse"
+			name="findByBillingCodeResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="billingServicePort">
+		<wsdl:operation name="newBilling">
+			<wsdl:input message="tns:newBillingRequest"
+				name="newBillingRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:newBillingResponse"
+				name="newBillingResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findByBillingCode">
+			<wsdl:input message="tns:findByBillingCodeRequest"
+				name="findByBillingCodeRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:findByBillingCodeResponse"
+				name="findByBillingCodeResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAllBilling">
+			<wsdl:input message="tns:findAllBillingRequest"
+				name="findAllBillingRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:findAllBillingResponse"
+				name="findAllBillingResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBilling">
+			<wsdl:input message="tns:updateBillingRequest"
+				name="updateBillingRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:updateBillingResponse"
+				name="updateBillingResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteBilling">
+			<wsdl:input message="tns:deleteBillingRequest"
+				name="deleteBillingRequest">
+			</wsdl:input>
+			<wsdl:output message="tns:deleteBillingResponse"
+				name="deleteBillingResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="billingServicePortSoap11"
+		type="tns:billingServicePort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="newBilling">
+			<soap:operation soapAction="" />
+			<wsdl:input name="newBillingRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="newBillingResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findByBillingCode">
+			<soap:operation soapAction="" />
+			<wsdl:input name="findByBillingCodeRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findByBillingCodeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAllBilling">
+			<soap:operation soapAction="" />
+			<wsdl:input name="findAllBillingRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="findAllBillingResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBilling">
+			<soap:operation soapAction="" />
+			<wsdl:input name="updateBillingRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateBillingResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteBilling">
+			<soap:operation soapAction="" />
+			<wsdl:input name="deleteBillingRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteBillingResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="billingServicePortService">
+		<wsdl:port binding="tns:billingServicePortSoap11"
+			name="billingServicePortSoap11">
+			<soap:address location="http://localhost:8080/ws" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

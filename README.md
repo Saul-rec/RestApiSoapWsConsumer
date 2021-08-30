@@ -1,1 +1,2 @@
-RestApiSoapWsConsumer
+This is a continuation project of billingService demo project where I made and expose a simple SOAP ws.
+In this project I´m using springboot too to create this time a rest API to consume the operations described the SOAP wsdl.
